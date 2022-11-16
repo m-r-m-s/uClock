@@ -6,7 +6,8 @@
  * MIDI compilant Clock Sync Receiver with 
  * monitor support using oled displays
  *
- * You need the following libraries to make it work
+ * You need the following libraries to make it work:
+ * - arduino_midi_library
  * - u8g2
  * - uClock
  *
@@ -124,7 +125,7 @@ void loop() {
 
   if (bpm != uClock.getTempo()) {
     bpm = uClock.getTempo();
-    u8x8->drawUTF8(8, 3, String(bpm, 1).c_str());
+    u8x8->drawUTF8(8, 3, String(bpm, 1).c_str()); // X,Y coordinates are for 128x32 oled display. Adjust as needed for 128x64, etc.
     u8x8->drawUTF8(8+5, 3, "bpm");
     // clear display ghost number for 2 digit
     // coming from 3 digit bpm changes
