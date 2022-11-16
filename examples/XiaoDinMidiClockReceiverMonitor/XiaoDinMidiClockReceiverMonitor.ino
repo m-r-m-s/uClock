@@ -1,5 +1,18 @@
 #include <Arduino.h>
 
+/* DIN MIDI Clock Sync Receiver with OLED Support
+ *  
+ * This example demonstrates how to create a
+ * MIDI compilant Clock Sync Receiver with 
+ * monitor support using oled displays
+ *
+ * You need the following libraries to make it work
+ * - u8g2
+ * - uClock
+ *
+ * This example code is in the public domain.
+ */
+
 #include <U8x8lib.h>
 
 #ifdef U8X8_HAVE_HW_SPI
