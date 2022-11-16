@@ -1,7 +1,7 @@
-/* USB MIDI Sync Slave Box Monitor
+/* USB MIDI Clock Sync Receiver with OLED Support
  *  
  * This example demonstrates how to create a
- * MIDI hid compilant slave clock box with 
+ * MIDI hid compilant clock sync receiver with 
  * monitor support using oled displays
  *
  * Making use of a 250 usceconds timer to

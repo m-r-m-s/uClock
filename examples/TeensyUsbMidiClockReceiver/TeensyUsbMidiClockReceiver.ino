@@ -1,17 +1,4 @@
-/* USB MIDI Sync Box
- *  
- * This example demonstrates how to change the USB MIDI 
- * device name on Teensy LC and 3.x.  When creating more
- * that one MIDI device, custom names are much easier to
- * use when selecting each device in MIDI software on
- * your PC or Mac.  The custom name is in the "name.c" tab.
- *
- * Windows and Macintosh systems often cache USB info.
- * After changing the name, you may need to test on a
- * different computer to observe the new name, or take
- * steps to get your operating system to "forget" the
- * cached info.  (TODO: wanted... can anyone contribute
- * instructions for these systems)
+/* USB MIDI Clock Sync Box Receiver
  * 
  * You must select MIDI from the "Tools > USB Type" menu
  * 
@@ -37,23 +24,44 @@ void handle_bpm_led(uint32_t tick)
 
 // Internal clock handlers
 void ClockOut96PPQN(uint32_t tick) {
-  // Send MIDI_CLOCK to external gears
-  usbMIDI.sendRealTime(usbMIDI.Clock);
+  // Send MIDI_CLOCK to external gears on other port?
+  //usbMIDI.sendRealTime(usbMIDI.Clock);
   handle_bpm_led(tick);
 }
 
 void onClockStart() {
-  usbMIDI.sendRealTime(usbMIDI.Start);
+  //usbMIDI.sendRealTime(usbMIDI.Start);
 }
 
 void onClockStop() {
-  usbMIDI.sendRealTime(usbMIDI.Stop);
+  //usbMIDI.sendRealTime(usbMIDI.Stop);
+}
+
+// External clock handlers
+void onExternalClock()
+{
+  uClock.clockMe();
+}
+
+void onExternalStart()
+{
+  uClock.start();
+}
+
+void onExternalStop()
+{
+  uClock.stop();
 }
 
 void setup() {
   // A led to count bpms
   pinMode(LED_BUILTIN, OUTPUT);
   
+  // Setup realtime midi event handlers
+  usbMIDI.setHandleClock(onExternalClock);
+  usbMIDI.setHandleStart(onExternalStart);
+  usbMIDI.setHandleStop(onExternalStop);
+
   // Setup our clock system
   // Inits the clock
   uClock.init();
@@ -62,13 +70,11 @@ void setup() {
   // Set the callback function for MIDI Start and Stop messages.
   uClock.setOnClockStartOutput(onClockStart);  
   uClock.setOnClockStopOutput(onClockStop);
-  // Set the clock BPM to 126 BPM
-  uClock.setTempo(126);
-  // Starts the clock, tick-tac-tick-tac...
-  uClock.start();
+  // set to external sync mode
+  uClock.setMode(1);
 }
 
-// Do it whatever to interface with Clock.stop(), Clock.start(), Clock.setTempo() and integrate your environment...
 void loop() {
-
+  // Grab all midi data as fast as we can!
+  while (usbMIDI.read()) {}
 }

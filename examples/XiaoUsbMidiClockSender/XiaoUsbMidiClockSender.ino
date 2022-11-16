@@ -1,8 +1,5 @@
-/* USB MIDI Sync Box
- *  
- * This example demonstrates how to change the USB MIDI 
- * device name on Seeedstudio XIAO M0. 
- * 
+/* USB MIDI Clock Sender Sync Box
+ *
  * This example code is in the public domain.
  * 
  * Tested with Adafruit TinyUSB version 0.10.5

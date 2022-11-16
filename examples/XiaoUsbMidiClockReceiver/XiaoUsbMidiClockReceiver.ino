@@ -1,8 +1,9 @@
 #include <Arduino.h>
 /*
-  uCLOCK USB MIDI CLOCK RECEIVER
-  https://github.com/midilab/uClock
-  https://github.com/adafruit/Adafruit_TinyUSB_Arduino/blob/master/examples/MIDI/midi_test/midi_test.ino
+ * USB MIDI Clock Receiver 
+ * https://github.com/midilab/uClock
+ * https://github.com/adafruit/Adafruit_TinyUSB_Arduino/blob/master/examples/MIDI/midi_test/midi_test.ino
+ *
 */
 
 #include <Adafruit_TinyUSB.h> // NOTE: for Seed Xiao use version 0.10.5: https://github.com/adafruit/Adafruit_TinyUSB_Arduino/releases/tag/0.10.5
